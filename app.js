@@ -8,7 +8,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/campgrounds', function (req, res) {
-    var campground = [
+    var campgrounds = [
         {
             name: "Salmon Creek",
             image: "https://farm5.staticflickr.com/4423/37232133702_342e447ccb.jpg"
@@ -22,7 +22,9 @@ app.get('/campgrounds', function (req, res) {
             image: "https://farm9.staticflickr.com/8673/15989950903_8185ed97c3.jpg"
         }
     ]
-    res.render('campgrounds');
+    res.render('campgrounds', {
+        campgrounds: campgrounds
+    });
 });
 
 app.listen(3000, '127.0.0.1');
