@@ -13,7 +13,8 @@ mongoose.connect('mongodb://127.0.0.1/data');
 
 var campgroundSchema = new mongoose.Schema({
     name: String,
-    image: String
+    image: String,
+    description: String
 });
 
 var Campground = mongoose.model('Campground', campgroundSchema);
@@ -29,7 +30,7 @@ app.get('/campgrounds', function (req, res) {
         if (err) {
             console.log('Some db error' + err)
         } else {
-            res.render('campgrounds', {
+            res.render('index', {
                 campgrounds: allCampgrounds
             });
         }
@@ -39,6 +40,10 @@ app.get('/campgrounds', function (req, res) {
 
 app.get('/campgrounds/new', function (req, res) {
     res.render('new');
+});
+
+app.get('/campgrounds/:id', function (req, res) {
+    res.render('show');
 });
 
 app.post('/campgrounds', function (req, res) {
