@@ -14,6 +14,22 @@ var campgrounds = [
     {
         name: "Mountian Goat's Rest",
         image: "https://farm9.staticflickr.com/8673/15989950903_8185ed97c3.jpg"
+        },
+    {
+        name: "Granite Hill",
+        image: "https://farm2.staticflickr.com/1363/1342367857_2fd12531e7.jpg"
+        },
+    {
+        name: "Mountian Goat's Rest",
+        image: "https://farm9.staticflickr.com/8673/15989950903_8185ed97c3.jpg"
+        },
+    {
+        name: "Granite Hill",
+        image: "https://farm2.staticflickr.com/1363/1342367857_2fd12531e7.jpg"
+        },
+    {
+        name: "Mountian Goat's Rest",
+        image: "https://farm9.staticflickr.com/8673/15989950903_8185ed97c3.jpg"
         }
     ];
 
