@@ -43,16 +43,27 @@ app.get('/campgrounds/new', function (req, res) {
 });
 
 app.get('/campgrounds/:id', function (req, res) {
-    res.render('show');
+    Campground.findById(req.params.id, function (err, found) {
+        if (err) {
+            //console.log("!!!!!ERRROR" + err);
+        } else {
+            console.log(found);
+            res.render('show', {
+                found: found
+            });
+        }
+    });
 });
 
 app.post('/campgrounds', function (req, res) {
     var name = req.body.name;
     var imgUrl = req.body.url;
+    var desc = req.body.description;
 
     Campground.create({
         name: name,
-        image: imgUrl
+        image: imgUrl,
+        description: desc
     }, function (err, newlyAdded) {
         if (err) {
             console.log(err);

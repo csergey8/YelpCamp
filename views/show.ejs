@@ -1,1 +1,12 @@
-<h1>The show template</h1>
+<% include partials/header %>
+    <h1>The show template</h1>
+    <p>
+        <%= found.name %>
+    </p>
+
+
+    <img src="<%= found.image %>">
+    <p>
+        <%= found.description %>
+    </p>
+    <% include partials/footer %>
