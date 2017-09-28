@@ -1,6 +1,7 @@
 var express = require('express'),
     bodyPareser = require('body-parser'),
     mongoose = require('mongoose'),
+    Campground = require('./models/campground'),
     app = express();
 
 app.use(bodyPareser.urlencoded({
@@ -11,13 +12,6 @@ app.set('view engine', 'ejs');
 
 mongoose.connect('mongodb://127.0.0.1/data');
 
-var campgroundSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String
-});
-
-var Campground = mongoose.model('Campground', campgroundSchema);
 
 //Routes
 
