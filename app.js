@@ -39,7 +39,7 @@ app.get('/campgrounds/new', function (req, res) {
 });
 
 app.get('/campgrounds/:id', function (req, res) {
-    Campground.findById(req.params.id, function (err, found) {
+    Campground.findById(req.params.id).populate("comments").exec(function (err, found) {
         if (err) {
             //console.log("!!!!!ERRROR" + err);
         } else {
