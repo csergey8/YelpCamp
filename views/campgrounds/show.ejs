@@ -1,26 +1,53 @@
 <% include ../partials/header %>
-    <h1>The show template</h1>
-    <p>
-        <%= found.name %>
-    </p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <p class="lead">YelpCamp</p>
+                <div class="list-group">
+                    <li class="list-group-item active">Info 1</li>
+                    <li class="list-group-item">Info 2</li>
+                    <li class="list-group-item">Info 3</li>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="thumbnail" style="width: auto; height: auto">
+                    <img class="img-responsive" src="<%= found.image %>">
+                    <div class="caption-full">
+                        <h6 class="float-right">9.99$/night</h6>
+                        <h4>
+                            <a href="#">
+                                <%= found.name %>
+                            </a>
+                        </h4>
+                    </div>
+                    <div>
+                        <p>
+                            <%= found.description %>
+                        </p>
+                    </div>
+                </div>
+                <div class="card card-inverse" style="background-color: #e6e6e6; padding: 10px;">
+                    <div class="card-block">
+                        <a class="btn btn-success float-right" href="/campgrounds/<%= found._id %>/comments/new">Add new comment</a>
+
+                        <h4 class="card-title" style="padding-bottom: 15px">Comments</h4>
+                        <% found.comments.forEach(function(comment){ %>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <b><%= comment.author %></b>
+                                    <span class="float-right">10 days ago</span>
+                                    <p>
+                                        <%= comment.text %>
+                                    </p>
+                                </div>
+                            </div>
+                            <% }); %>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-    <img src="<%= found.image %>">
-    <p>
-        <%= found.description %>
-    </p>
-    <p>
-
-        <a class="btn btn-primary" href="/campgrounds/<%= found._id %>/comments/new">Add new comment</a>
-    </p>
-
-    <% found.comments.forEach(function(comment){ %>
-        <p>
-            <strong><%= comment.author %></strong>
-        </p>
-        ---
-        <p>
-            <%= comment.text %>
-        </p>
-        <% }); %>
-            <% include ../partials/footer %>
+    <% include ../partials/footer %>
