@@ -1,0 +1,13 @@
+.card.card-inverse {
+    background-color: #e6e6e6;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.card.card-inverse h4 {
+    padding-bottom: 15px;
+}
+
+#thumb-img {
+    margin-bottom: 20px;
+}

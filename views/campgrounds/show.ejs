@@ -11,7 +11,7 @@
             </div>
             <div class="col-md-9">
                 <div class="thumbnail" style="width: auto; height: auto">
-                    <img class="img-responsive" src="<%= found.image %>">
+                    <img class="img-responsive" id="thumb-img" src="<%= found.image %>">
                     <div class="caption-full">
                         <h6 class="float-right">9.99$/night</h6>
                         <h4>
@@ -26,11 +26,11 @@
                         </p>
                     </div>
                 </div>
-                <div class="card card-inverse" style="background-color: #e6e6e6; padding: 10px;">
+                <div class="card card-inverse">
                     <div class="card-block">
                         <a class="btn btn-success float-right" href="/campgrounds/<%= found._id %>/comments/new">Add new comment</a>
 
-                        <h4 class="card-title" style="padding-bottom: 15px">Comments</h4>
+                        <h4 class="card-title">Comments</h4>
                         <% found.comments.forEach(function(comment){ %>
                             <div class="row">
                                 <div class="col-md-12">

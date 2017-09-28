@@ -12,6 +12,7 @@ app.use(bodyPareser.urlencoded({
 }));
 
 app.set('view engine', 'ejs');
+app.use(express.static(__dirname + "/public"));
 
 mongoose.connect('mongodb://127.0.0.1/data');
 
