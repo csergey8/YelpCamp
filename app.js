@@ -1,9 +1,13 @@
 var express = require('express'),
     bodyPareser = require('body-parser'),
     mongoose = require('mongoose'),
+    passport = require('passport'),
+    session = require('express-session'),
+    LocalStrategy = require('passport-local'),
     Campground = require('./models/campground'),
     seedDB = require('./seeds'),
     Comment = require('./models/comment'),
+    User = require('./models/user'),
     app = express();
 
 seedDB();
