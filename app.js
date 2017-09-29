@@ -163,7 +163,13 @@ app.post('/login', passport.authenticate('local', {
     failureRedirect: '/login'
 }), function (req, res) {
 
-})
+});
+
+// LOG-OUT ROUTE
+app.get('/logout', function (req, res) {
+    req.logout();
+    res.redirect('/campgrounds');
+});
 
 
 
