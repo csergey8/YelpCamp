@@ -152,5 +152,13 @@ app.post('/register', function (req, res) {
     });
 });
 
+//SHOW LOGIN FORM
+app.get('/login', function (req, res) {
+    res.render('login');
+});
 
+
+
+
+//SERVER START LISTENING
 app.listen(3000, '127.0.0.1');
