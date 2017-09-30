@@ -29,6 +29,9 @@
                             <%= found.author.username %></i>
                         </p>
                         <a href="/campgrounds/<%= found._id%>/edit" class="btn btn-warning">Edit</a>
+                        <form action="/campgrounds/<%= found._id %>?_method=delete" method=post id="delete">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
                     </div>
                 </div>
                 <div class="card card-inverse">
