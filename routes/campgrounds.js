@@ -59,6 +59,12 @@ router.post('/', isLoggedIn, function (req, res) {
 
 });
 
+// EDIT CAMPGROUD ROUTE
+
+// UPDATE CAMPGROUND ROUTE
+
+
+
 function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
         return next();

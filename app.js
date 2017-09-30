@@ -4,6 +4,7 @@ var express = require('express'),
     passport = require('passport'),
     session = require('express-session'),
     LocalStrategy = require('passport-local'),
+    methodOverrivde = require('method-override'),
     Campground = require('./models/campground'),
     User = require('./models/user'),
     seedDB = require('./seeds'),
@@ -21,6 +22,7 @@ app.use(bodyPareser.urlencoded({
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + "/public"));
+app.use(methodOverrivde('_method'));
 
 
 mongoose.connect('mongodb://127.0.0.1/data');
