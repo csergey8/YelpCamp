@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
 
 });
 
-router.get('/new', function (req, res) {
+router.get('/new', isLoggedIn, function (req, res) {
     res.render('campgrounds/new');
 });
 
@@ -35,15 +35,20 @@ router.get('/:id', function (req, res) {
     });
 });
 
-router.post('/', function (req, res) {
+router.post('/', isLoggedIn, function (req, res) {
     var name = req.body.name;
     var imgUrl = req.body.url;
     var desc = req.body.description;
+    var author = {
+        id: req.user.id,
+        username: req.user.username
+    }
 
     Campground.create({
         name: name,
         image: imgUrl,
-        description: desc
+        description: desc,
+        author: author
     }, function (err, newlyAdded) {
         if (err) {
             console.log(err);
@@ -53,5 +58,12 @@ router.post('/', function (req, res) {
     });
 
 });
+
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/login');
+};
 
 module.exports = router;

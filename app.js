@@ -5,9 +5,9 @@ var express = require('express'),
     session = require('express-session'),
     LocalStrategy = require('passport-local'),
     Campground = require('./models/campground'),
+    User = require('./models/user'),
     seedDB = require('./seeds'),
     Comment = require('./models/comment'),
-    User = require('./models/user'),
     app = express();
 
 var commentRoutes = require('./routes/comments');
