@@ -18,6 +18,7 @@ app.use(bodyPareser.urlencoded({
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + "/public"));
 
+
 mongoose.connect('mongodb://127.0.0.1/data');
 
 seedDB();
@@ -38,6 +39,10 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.use(function (req, res, next) {
+    res.locals.currentUser = req.user;
+    next();
+});
 
 //Routes
 
@@ -51,7 +56,8 @@ app.get('/campgrounds', function (req, res) {
             console.log('Some db error' + err)
         } else {
             res.render('campgrounds/index', {
-                campgrounds: allCampgrounds
+                campgrounds: allCampgrounds,
+                currentUser: req.user
             });
         }
     });
