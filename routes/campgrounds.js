@@ -4,7 +4,7 @@ var Campground = require('../models/campground')
 var Comment = require('../models/comment')
 
 
-router.get('/campgrounds', function (req, res) {
+router.get('/', function (req, res) {
     Campground.find({}, function (err, allCampgrounds) {
         if (err) {
             console.log('Some db error' + err)
@@ -18,11 +18,11 @@ router.get('/campgrounds', function (req, res) {
 
 });
 
-router.get('/campgrounds/new', function (req, res) {
+router.get('/new', function (req, res) {
     res.render('campgrounds/new');
 });
 
-router.get('/campgrounds/:id', function (req, res) {
+router.get('/:id', function (req, res) {
     Campground.findById(req.params.id).populate("comments").exec(function (err, found) {
         if (err) {
             //console.log("!!!!!ERRROR" + err);
@@ -35,7 +35,7 @@ router.get('/campgrounds/:id', function (req, res) {
     });
 });
 
-router.post('/campgrounds', function (req, res) {
+router.post('/', function (req, res) {
     var name = req.body.name;
     var imgUrl = req.body.url;
     var desc = req.body.description;
