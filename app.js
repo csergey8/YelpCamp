@@ -25,7 +25,7 @@ app.use(express.static(__dirname + "/public"));
 
 mongoose.connect('mongodb://127.0.0.1/data');
 
-seedDB();
+//seedDB();
 
 //PASSPORT CONFIG 
 
