@@ -49,15 +49,20 @@
                                     <p>
                                         <%= comment.text %>
                                     </p>
-                                    <a class="btn btn-warning btn-xs" href="/campgrounds/<%= found._id%>/comments/<%= comment._id%>/edit">Edit</a></div>
-                            </div>
-                            <% }); %>
+                                    <% if(currentUser && comment.author.id.equals(currentUser._id)){%>
+                                        <a class="btn btn-warning btn-sm" href="/campgrounds/<%= found._id%>/comments/<%= comment._id%>/edit">Edit</a>
+                                        <form id="delete" action="/campgrounds/<%= found._id %>/comments/<%= comment._id%>?_method=DELETE" method="post">
+                                            <button class="btn btn-danger btn-sm">X</button>
+                                        </form>
+                                        <% } %>
+                                </div>
+                                <% }); %>
 
+                            </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <% include ../partials/footer %>
+        <% include ../partials/footer %>
