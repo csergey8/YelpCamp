@@ -6,16 +6,19 @@ var middlewareObj = {
         if (req.isAuthenticated()) {
             Campground.findById(req.params.id, function (err, foundCampground) {
                 if (err) {
+                    req.flash('error', 'Error');
                     res.redirect('back');
                 } else {
                     if (foundCampground.author.id.equals(req.user._id)) {
                         next();
                     } else {
+                        req.flash('error', 'You dont have permission');
                         res.redirect('back');
                     }
                 }
             });
         } else {
+            req.flash('error', 'Please Login First');
             res.redirect('/login');
         }
     },
@@ -35,6 +38,7 @@ var middlewareObj = {
             });
 
         } else {
+            req.flash('error', 'Please Login First');
             res.redirect('/login');
         }
 

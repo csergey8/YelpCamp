@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var User = require('../models/user');
+var middleware = require('../middleware');
 
 //ROOT route
 router.get('/', function (req, res) {
@@ -20,12 +21,12 @@ router.post('/register', function (req, res) {
     });
     User.register(newUser, req.body.password, function (err, user) {
         if (err) {
-            req.flash('error', "User " +
-                req.body.username + " is already exist");
+            req.flash('error', err.message);
             return res.redirect('/register');
         }
         passport.authenticate('local')(req, res, function () {
-            res.send('Succes');
+            req.flash('success', 'Success! Welcome to YelpCamp');
+            res.redirect('/');
         });
     });
 });
@@ -50,11 +51,6 @@ router.get('/logout', function (req, res) {
     res.redirect('/campgrounds');
 });
 
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect('/login');
-};
+
 
 module.exports = router;

@@ -19,15 +19,16 @@ router.get('/', function (req, res) {
 });
 
 router.get('/new', middleware.isLoggedIn, function (req, res) {
+    req.flash('error', 'Please Login First');
     res.render('campgrounds/new');
 });
 
 router.get('/:id', function (req, res) {
     Campground.findById(req.params.id).populate("comments").exec(function (err, found) {
         if (err) {
-            //console.log("!!!!!ERRROR" + err);
+            req.flash('error', 'Campground Not Found');
+
         } else {
-            console.log(found);
             res.render('campgrounds/show', {
                 found: found
             });
@@ -38,6 +39,7 @@ router.get('/:id', function (req, res) {
 router.post('/', middleware.isLoggedIn, function (req, res) {
     var name = req.body.name;
     var imgUrl = req.body.url;
+    var price = req.body.price;
     var desc = req.body.description;
     var author = {
         id: req.user.id,
@@ -47,11 +49,12 @@ router.post('/', middleware.isLoggedIn, function (req, res) {
     Campground.create({
         name: name,
         image: imgUrl,
+        price: price,
         description: desc,
         author: author
     }, function (err, newlyAdded) {
         if (err) {
-            console.log(err);
+            req.flash('error', 'Something was wrong');
         } else {
             res.redirect('/campgrounds');
         }
@@ -62,6 +65,11 @@ router.post('/', middleware.isLoggedIn, function (req, res) {
 // EDIT CAMPGROUD ROUTE
 router.get('/:id/edit', middleware.checkCampgroundOwnership, function (req, res) {
     Campground.findById(req.params.id, function (err, foundCampground) {
+        if (err) {
+            req.flash('error', 'Cant edit');
+            res.redirect('campground/' + req.params.id)
+
+        }
         res.render('campgrounds/edit', {
             campground: foundCampground
         });
@@ -76,6 +84,7 @@ router.put('/:id', middleware.checkCampgroundOwnership, function (req, res) {
     Campground.findByIdAndUpdate(req.params.id, req.body.campground,
         function (err, updatedCampground) {
             if (err) {
+                req.flash('error', 'Something was wrong');
                 res.redirect('/campgrounds');
             } else {
                 res.redirect('/campgrounds/' + req.params.id);
@@ -88,6 +97,7 @@ router.put('/:id', middleware.checkCampgroundOwnership, function (req, res) {
 router.delete('/:id', middleware.checkCampgroundOwnership, function (req, res) {
     Campground.findByIdAndRemove(req.params.id, function (err) {
         if (err) {
+            req.flash('error', 'Something was wrong');
             res.redirect('/capgrounds/' + req.params.id);
         } else {
             res.redirect('/campgrounds');
