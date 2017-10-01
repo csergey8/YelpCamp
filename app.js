@@ -1,6 +1,7 @@
 var express = require('express'),
     bodyPareser = require('body-parser'),
     mongoose = require('mongoose'),
+    flash = require('connect-flash'),
     passport = require('passport'),
     session = require('express-session'),
     LocalStrategy = require('passport-local'),
@@ -23,6 +24,7 @@ app.use(bodyPareser.urlencoded({
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverrivde('_method'));
+app.use(flash());
 
 
 mongoose.connect('mongodb://127.0.0.1/data');
@@ -47,6 +49,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function (req, res, next) {
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash('error');
+    res.locals.success = req.flash('success');
     next();
 });
 

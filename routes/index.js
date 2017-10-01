@@ -20,7 +20,8 @@ router.post('/register', function (req, res) {
     });
     User.register(newUser, req.body.password, function (err, user) {
         if (err) {
-            console.log(err + "!!!!!!");
+            req.flash('error', "User " +
+                req.body.username + " is already exist");
             return res.redirect('/register');
         }
         passport.authenticate('local')(req, res, function () {
@@ -45,6 +46,7 @@ router.post('/login', passport.authenticate('local', {
 // LOG-OUT ROUTE
 router.get('/logout', function (req, res) {
     req.logout();
+    req.flash('success', 'Logged Out');
     res.redirect('/campgrounds');
 });
 
