@@ -27,7 +27,7 @@ app.use(methodOverrivde('_method'));
 app.use(flash());
 
 
-mongoose.connect('mongodb://127.0.0.1/data');
+mongoose.connect('mongodb://user:123456@ds159254.mlab.com:59254/data');
 
 //seedDB();
 
